@@ -1,0 +1,51 @@
+{
+  "game": "Space Junk",
+  "card_specs": {
+    "width_px": 825,
+    "height_px": 1125,
+    "dpi": 300,
+    "bleed_px": 37,
+    "safe_margin_px": 75
+  },
+  "text_boxes": {
+    "title": {
+      "x": 75, "y": 50, "width": 675, "height": 60,
+      "font_size": 28, "align": "center", "color": "#FFFFFF"
+    },
+    "stats_top_left": {
+      "x": 40, "y": 40, "width": 80, "height": 80,
+      "font_size": 36, "align": "center", "color": "#FFFFFF"
+    },
+    "stats_top_right": {
+      "x": 705, "y": 40, "width": 80, "height": 80,
+      "font_size": 36, "align": "center", "color": "#FFFFFF"
+    },
+    "flavor_text": {
+      "x": 75, "y": 950, "width": 675, "height": 120,
+      "font_size": 16, "align": "center", "color": "#CCCCCC"
+    }
+  },
+  "cards": [
+    {
+      "id": "sj-001",
+      "title": "Orbital Debris",
+      "stats": { "top_left": "3", "top_right": "5" },
+      "flavor_text": "What goes up must come down... eventually.",
+      "art_prompt": "Dramatic scene of glowing metallic space debris tumbling through low Earth orbit, Earth's blue atmosphere glowing below, lens flare from the sun, photorealistic, cinematic lighting, vibrant colors"
+    },
+    {
+      "id": "sj-002",
+      "title": "Rogue Satellite",
+      "stats": { "top_left": "7", "top_right": "2" },
+      "flavor_text": "It stopped responding to commands three years ago.",
+      "art_prompt": "A derelict satellite with broken solar panels drifting through space, sparking electronics, stars in background, ominous purple nebula, photorealistic, dramatic lighting, high detail"
+    },
+    {
+      "id": "sj-003",
+      "title": "Solar Flare Shield",
+      "stats": { "top_left": "1", "top_right": "9" },
+      "flavor_text": "The last line of defense against the storm.",
+      "art_prompt": "A futuristic hexagonal energy shield in space glowing bright orange and gold, deflecting a massive solar flare, spacecraft behind it, epic scale, photorealistic, vibrant warm colors"
+    }
+  ]
+}

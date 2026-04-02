@@ -1,3 +1,10 @@
+# CardMaker — working output (regenerated, not versioned)
+output/print-ready/
+output/previews/
+
+# macOS
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

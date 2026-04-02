@@ -1,0 +1,45 @@
+{
+  "decks": [
+    {
+      "id": "junk",
+      "name": "Junk Deck",
+      "back_prompt": "Playing card back design, rich brown and rust colored geometric pattern with a central emblem of a stylized satellite debris cluster, metallic gold accents, ornate symmetrical design, space themed, dark background with stars, premium card game quality, sharp details, vibrant"
+    },
+    {
+      "id": "hazard",
+      "name": "Hazard Deck",
+      "back_prompt": "Playing card back design, deep red and orange geometric pattern with a central emblem of a glowing radioactive warning symbol in space, neon orange accents, ornate symmetrical design, cosmic hazard theme, dark background with stars, premium card game quality, sharp details, vibrant"
+    },
+    {
+      "id": "mission",
+      "name": "Mission Deck",
+      "back_prompt": "Playing card back design, deep blue and teal geometric pattern with a central emblem of a glowing compass star navigation symbol, silver and cyan accents, ornate symmetrical design, space exploration theme, dark background with stars, premium card game quality, sharp details, vibrant"
+    }
+  ],
+  "card_types": [
+    {
+      "id": "junk",
+      "name": "Junk Card",
+      "deck": "junk",
+      "border_color": [101, 67, 33],
+      "border_accent": [200, 150, 60],
+      "border_prompt": "Thick wide cartoon border frame, brown rusty pipes and duct tape holding together junk and scrap metal, bolts popping out, a cartoon wrench and plunger sticking out of corners, fun whimsical junkyard style, colorful cartoon illustration style, very wide border, black center, game card frame, highly detailed"
+    },
+    {
+      "id": "personnel",
+      "name": "Personnel",
+      "deck": "junk",
+      "border_color": [200, 210, 230],
+      "border_accent": [255, 255, 255],
+      "border_prompt": "Thick wide cartoon border frame, bright white and silver with cute cartoon astronaut helmets and goofy winking smiley faces scattered around the border, fun space crew badge aesthetic, colorful cartoon illustration style, very wide border, stars and sparkles, black center, game card frame, highly detailed"
+    },
+    {
+      "id": "action",
+      "name": "Action",
+      "deck": "junk",
+      "border_color": [220, 20, 20],
+      "border_accent": [255, 100, 50],
+      "border_prompt": "Thick wide cartoon border frame, bright vivid red and orange with cartoon lightning bolts and comic book style POW ZAP explosion effects around the frame, fun energetic comic book action style, colorful cartoon illustration, very wide border, neon glow, black center, game card frame, highly detailed"
+    }
+  ]
+}

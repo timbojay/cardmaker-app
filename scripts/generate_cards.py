@@ -111,38 +111,29 @@ def load_icon(name, size=48):
     return _icon_cache[key]
 
 
-def draw_icon_row(canvas, icons_dict, x_start, y, area_width, icon_size, label_font_size):
-    """Draw a row of icons with multiplier labels. Returns nothing, draws in place."""
-    draw = ImageDraw.Draw(canvas)
-    font = get_font(label_font_size)
-
-    # Calculate total width needed
+def draw_icon_row(canvas, icons_dict, x_start, y, area_width, icon_size):
+    """Draw a row of repeated icons (e.g., 3 compasses instead of compass x3)."""
     items = [(k, v) for k, v in icons_dict.items() if v > 0]
     if not items:
         return
 
-    # Each item: icon + "x3" label + gap
-    item_widths = []
-    for name, count in items:
-        label = f"x{count}"
-        bbox = draw.textbbox((0, 0), label, font=font)
-        label_w = bbox[2] - bbox[0]
-        item_widths.append(icon_size + 4 + label_w)
+    gap_between_types = 20
+    gap_between_icons = 4
 
-    gap = 25
-    total_w = sum(item_widths) + gap * (len(items) - 1)
+    # Calculate total width
+    total_icons = sum(v for _, v in items)
+    total_w = total_icons * icon_size + (total_icons - 1) * gap_between_icons
+    total_w += (len(items) - 1) * (gap_between_types - gap_between_icons)
+
     x = x_start + (area_width - total_w) // 2
 
     for i, (name, count) in enumerate(items):
-        icon = load_icon(name, icon_size)
-        canvas.paste(icon, (x, y + (icon_size - icon_size) // 2), icon)
-        x += icon_size + 4
-
-        label = f"x{count}"
-        bbox = draw.textbbox((0, 0), label, font=font)
-        label_h = bbox[3] - bbox[1]
-        draw.text((x, y + (icon_size - label_h) // 2 - 2), label, fill=(50, 50, 50), font=font)
-        x += bbox[2] - bbox[0] + gap
+        for j in range(count):
+            icon = load_icon(name, icon_size)
+            canvas.paste(icon, (x, y), icon)
+            x += icon_size + gap_between_icons
+        if i < len(items) - 1:
+            x += gap_between_types - gap_between_icons
 
 
 def word_wrap(draw, text, font, max_width):
@@ -163,21 +154,41 @@ def word_wrap(draw, text, font, max_width):
     return lines
 
 
+def draw_plus_minus_circle(draw, x, y, size, is_plus=True):
+    """Draw a green + or red - circle."""
+    if is_plus:
+        color = (40, 180, 60)
+        draw.ellipse([x, y, x + size, y + size], fill=color)
+        # Plus sign
+        bar_w = size // 5
+        cx, cy = x + size // 2, y + size // 2
+        half = size // 3
+        draw.rounded_rectangle([cx - half, cy - bar_w // 2, cx + half, cy + bar_w // 2], radius=2, fill="white")
+        draw.rounded_rectangle([cx - bar_w // 2, cy - half, cx + bar_w // 2, cy + half], radius=2, fill="white")
+    else:
+        color = (210, 50, 50)
+        draw.ellipse([x, y, x + size, y + size], fill=color)
+        # Minus sign
+        bar_w = size // 5
+        cx, cy = x + size // 2, y + size // 2
+        half = size // 3
+        draw.rounded_rectangle([cx - half, cy - bar_w // 2, cx + half, cy + bar_w // 2], radius=2, fill="white")
+
+
 def composite_card(art_image, card, layout):
     """Build the full card with all zones."""
     margin = layout["inner_margin"]
     inner_left = margin
     inner_right = CARD_W - margin
     inner_width = inner_right - inner_left
+    icon_size = layout["icon_size"]
+    pm_size = layout.get("plus_minus_size", 44)
 
     # Start with a dark background
     canvas = Image.new("RGBA", (CARD_W, CARD_H), (30, 30, 40, 255))
     draw = ImageDraw.Draw(canvas)
 
-    icon_size = layout["icon_size"]
-    cost_icon_size = layout.get("cost_icon_size", icon_size)
-
-    # --- HEADER (title + benefits in one white block) ---
+    # --- HEADER (title + green plus + benefits in one white block) ---
     hdr_y = layout["header"]["y"]
     hdr_h = layout["header"]["height"]
     draw.rounded_rectangle(
@@ -185,23 +196,27 @@ def composite_card(art_image, card, layout):
         radius=12, fill=(255, 255, 255, 245),
     )
 
-    # Title text — top portion of header
+    # Title text
     font_title = get_font(layout["title_font_size"])
     bbox = draw.textbbox((0, 0), card["title"], font=font_title)
     tw = bbox[2] - bbox[0]
     th = bbox[3] - bbox[1]
     tx = inner_left + (inner_width - tw) // 2
-    ty = hdr_y + 10
+    ty = hdr_y + 8
     draw.text((tx, ty), card["title"], fill=(30, 30, 40), font=font_title)
 
-    # Thin separator line
-    sep_y = hdr_y + 10 + th + 8
+    # Thin separator
+    sep_y = ty + th + 6
     draw.line([inner_left + 20, sep_y, inner_right - 20, sep_y], fill=(200, 200, 210), width=1)
 
-    # Benefits icons — bottom portion of header
+    # Green + circle then benefit icons
     benefits = card.get("benefits", {})
-    icon_row_y = sep_y + 6
-    draw_icon_row(canvas, benefits, inner_left, icon_row_y, inner_width, icon_size, layout["label_font_size"])
+    icon_row_y = sep_y + 8
+    pm_y = icon_row_y + (icon_size - pm_size) // 2
+    draw_plus_minus_circle(draw, inner_left + 10, pm_y, pm_size, is_plus=True)
+    icons_x_start = inner_left + 10 + pm_size + 8
+    icons_area_w = inner_right - icons_x_start
+    draw_icon_row(canvas, benefits, icons_x_start, icon_row_y, icons_area_w, icon_size)
 
     # --- CARD ART ---
     art_y = layout["art_area"]["y"]
@@ -209,23 +224,33 @@ def composite_card(art_image, card, layout):
     art_crop = art_image.resize((inner_width, art_h), Image.LANCZOS)
     canvas.paste(art_crop.convert("RGBA"), (inner_left, art_y))
 
-    # --- DESCRIPTION (white box, black text) ---
-    desc_y = layout["description"]["y"]
-    desc_h = layout["description"]["height"]
-    draw.rounded_rectangle(
-        [inner_left, desc_y, inner_right, desc_y + desc_h],
-        radius=12, fill=(255, 255, 255, 240),
-    )
+    # --- INFO AREA (description + costs, one white block pushed to bottom) ---
+    # Calculate info area height dynamically based on content
     font_desc = get_font_regular(layout["desc_font_size"])
-    desc_text = card.get("description", card.get("flavor_text", ""))
-    lines = word_wrap(draw, desc_text, font_desc, inner_width - 30)
+    desc_text = card.get("description", "")
+    lines = word_wrap(draw, desc_text, font_desc, inner_width - 40)
 
-    # Vertically center the text block
-    total_text_h = sum(
+    text_block_h = sum(
         draw.textbbox((0, 0), line, font=font_desc)[3] - draw.textbbox((0, 0), line, font=font_desc)[1] + 4
         for line in lines
-    ) - 4
-    line_y = desc_y + (desc_h - total_text_h) // 2
+    )
+
+    # Info area: text + separator + cost icons row
+    info_padding = 15
+    sep_height = 25
+    cost_row_h = icon_size + 10
+    info_h = info_padding + text_block_h + sep_height + cost_row_h + info_padding
+
+    bottom_margin = layout.get("info_area_bottom_margin", 65)
+    info_y = CARD_H - bottom_margin - info_h
+
+    draw.rounded_rectangle(
+        [inner_left, info_y, inner_right, info_y + info_h],
+        radius=12, fill=(255, 255, 255, 245),
+    )
+
+    # Description text
+    line_y = info_y + info_padding
     for line in lines:
         bbox = draw.textbbox((0, 0), line, font=font_desc)
         lw = bbox[2] - bbox[0]
@@ -234,22 +259,18 @@ def composite_card(art_image, card, layout):
         draw.text((lx, line_y), line, fill=(40, 40, 50), font=font_desc)
         line_y += lh + 4
 
-    # --- COSTS STRIP (white, at very bottom) ---
-    cost_y = layout["costs_strip"]["y"]
-    cost_h = layout["costs_strip"]["height"]
-    draw.rounded_rectangle(
-        [inner_left, cost_y, inner_right, cost_y + cost_h],
-        radius=12, fill=(255, 255, 255, 240),
-    )
+    # Thin separator
+    sep_cost_y = line_y + 8
+    draw.line([inner_left + 20, sep_cost_y, inner_right - 20, sep_cost_y], fill=(210, 210, 215), width=1)
 
-    # "COST" label on left
-    font_cost_label = get_font(16)
-    draw.text((inner_left + 12, cost_y + (cost_h - 16) // 2), "COST", fill=(160, 100, 100), font=font_cost_label)
-
-    # Cost icons — centered, filling the strip height
+    # Red - circle then cost icons
     costs = card.get("costs", {})
-    icon_pad = (cost_h - cost_icon_size) // 2
-    draw_icon_row(canvas, costs, inner_left + 70, cost_y + icon_pad, inner_width - 70, cost_icon_size, layout["label_font_size"])
+    cost_icon_y = sep_cost_y + 10
+    cost_pm_y = cost_icon_y + (icon_size - pm_size) // 2
+    draw_plus_minus_circle(draw, inner_left + 10, cost_pm_y, pm_size, is_plus=False)
+    cost_icons_x = inner_left + 10 + pm_size + 8
+    cost_icons_w = inner_right - cost_icons_x
+    draw_icon_row(canvas, costs, cost_icons_x, cost_icon_y, cost_icons_w, icon_size)
 
     return canvas
 

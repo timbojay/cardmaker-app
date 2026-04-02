@@ -9,57 +9,45 @@
   },
   "layout": {
     "border_width": 55,
-    "header":         { "y": 60,  "height": 120 },
-    "art_area":       { "y": 185, "height": 580 },
-    "description":    { "y": 770, "height": 110 },
-    "costs_strip":    { "y": 885, "height": 75 },
+    "header":         { "y": 60,  "height": 135 },
+    "art_area":       { "y": 200, "height": 500 },
+    "info_area_bottom_margin": 65,
     "inner_margin": 70,
-    "icon_size": 56,
-    "cost_icon_size": 60,
-    "title_font_size": 34,
-    "desc_font_size": 22,
-    "label_font_size": 24
+    "icon_size": 72,
+    "plus_minus_size": 52,
+    "title_font_size": 38,
+    "desc_font_size": 26
   },
   "cards": [
     {
-      "id": "sj-001",
-      "title": "Orbital Debris",
+      "id": "sj-005",
+      "title": "Rocket Booster",
       "deck": "junk",
       "type": "junk",
-      "benefits": { "navigation": 2 },
-      "costs": { "bajillion": 1 },
-      "description": "Dave's lunch from 1998 is still up there. And it's angry.",
-      "art_prompt": "Colorful cartoon illustration of a chaotic cloud of silly space junk orbiting Earth, including a rubber duck, an old TV set, a toilet seat, and a pizza box all tumbling weightlessly, Earth glowing blue below, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style lighting"
+      "benefits": { "navigation": 3, "capacity": 1 },
+      "costs": { "bajillion": 2, "payload": 3 },
+      "description": "It fell off a perfectly good rocket. Still has some kick left.",
+      "art_prompt": "Colorful cartoon illustration of a huge dented rocket booster engine floating in space with cartoon flames still sputtering out of it, duct tape patches all over it, a cartoon face looking dizzy with spiral eyes, stars and planets in background, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style"
     },
     {
-      "id": "sj-002",
-      "title": "Rogue Satellite",
+      "id": "sj-006",
+      "title": "Ford Pinto",
       "deck": "junk",
       "type": "junk",
-      "benefits": { "navigation": 3, "fame": 1 },
-      "costs": { "bajillion": 3 },
-      "description": "It gained sentience. Its first act was to unsubscribe from NASA's emails.",
-      "art_prompt": "Colorful cartoon illustration of a grumpy looking old satellite with a cracked solar panel used as a middle finger, angry cartoon eyes on the satellite body, sparks flying, purple nebula background with stars, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style"
+      "benefits": { "navigation": 1, "fame": 2, "capacity": 3 },
+      "costs": { "bajillion": 1, "payload": 2, "fame_penalty": 1 },
+      "description": "Someone launched a 1973 Ford Pinto into orbit. It still rear-ends things.",
+      "art_prompt": "Colorful cartoon illustration of a rusty beat-up 1970s Ford Pinto car floating in space with a small rocket strapped to the roof, bumper falling off, a bumper sticker that says honk, exhaust fumes in zero gravity forming a cloud, Earth in background, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style"
     },
     {
-      "id": "sj-003",
-      "title": "Solar Flare Shield",
+      "id": "sj-007",
+      "title": "Escape Capsule",
       "deck": "junk",
       "type": "action",
-      "benefits": { "navigation": 1 },
-      "costs": { "bajillion": 2, "fame_penalty": 1 },
-      "description": "SPF 9 billion. Still not enough for Karen's vacation.",
-      "art_prompt": "Colorful cartoon illustration of a tiny spacecraft hiding behind a comically oversized beach umbrella in space while a massive angry cartoon sun blasts a solar flare at it, the sun has a furious cartoon face, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style lighting"
-    },
-    {
-      "id": "sj-004",
-      "title": "Space Mechanic",
-      "deck": "junk",
-      "type": "personnel",
-      "benefits": { "navigation": 2, "fame": 3 },
-      "costs": { "bajillion": 4 },
-      "description": "She can fix anything. Except her marriage.",
-      "art_prompt": "Colorful cartoon illustration of a tough-looking female astronaut mechanic floating in space with a huge wrench and duct tape, grease smudges on her helmet visor, surrounded by floating bolts and spare parts, giving a confident wink, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style"
+      "benefits": { "navigation": 2, "fame": 1, "capacity": 2 },
+      "costs": { "bajillion": 3, "payload": 1 },
+      "description": "Seats four uncomfortably. Smells like astronaut panic.",
+      "art_prompt": "Colorful cartoon illustration of a tiny cramped space escape pod capsule with a cartoon window showing terrified cartoon astronaut faces squished against the glass, the capsule is dented and has warning stickers all over it, floating in space near a space station, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style"
     }
   ]
 }

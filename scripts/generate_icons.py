@@ -21,15 +21,23 @@ COMFYUI_URL = "http://127.0.0.1:8188"
 ICONS = [
     {
         "id": "navigation",
-        "prompt": "Single cartoon compass icon on a solid black background, glowing blue and gold nautical compass with a spinning needle, fun cartoon game icon style, clean simple design, centered, no text, bright colors, game UI icon",
+        "prompt": "Single cartoon compass icon on a solid white background, bright blue and gold nautical compass with a spinning needle, fun cartoon game icon style, clean simple bold design, centered, no text, bright vivid colors, game UI icon, white background",
     },
     {
         "id": "fame",
-        "prompt": "Single cartoon golden Oscar trophy statue icon on a solid black background, shiny gold award trophy with a star on top, fun cartoon game icon style, clean simple design, centered, no text, bright gold color, game UI icon",
+        "prompt": "Single cartoon golden Oscar trophy statue icon on a solid white background, shiny gold award trophy with a star on top, fun cartoon game icon style, clean simple bold design, centered, no text, bright gold color, game UI icon, white background",
     },
     {
         "id": "bajillion",
-        "prompt": "Single cartoon gold bar icon on a solid black background, shiny golden ingot brick with a dollar sign stamped on it, fun cartoon game icon style, clean simple design, centered, no text, bright gold color, game UI icon",
+        "prompt": "Single cartoon gold bar ingot icon on a solid white background, shiny golden brick with a dollar sign stamped on it, fun cartoon game icon style, clean simple bold design, centered, no text, bright gold color, game UI icon, white background",
+    },
+    {
+        "id": "payload",
+        "prompt": "Single cartoon wooden cargo crate box icon on a solid white background, brown shipping crate with a small rocket sticker on it, fun cartoon game icon style, clean simple bold design, centered, no text, bright colors, game UI icon, white background",
+    },
+    {
+        "id": "capacity",
+        "prompt": "Single cartoon muscular arm flexing bicep icon on a solid white background, strong buff arm with bulging muscles, fun cartoon game icon style, clean simple bold design, centered, no text, bright colors, game UI icon, white background",
     },
 ]
 

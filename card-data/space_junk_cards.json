@@ -9,12 +9,12 @@
   },
   "layout": {
     "border_width": 55,
-    "header":         { "y": 60,  "height": 135 },
+    "header":         { "y": 60,  "height": 160 },
     "art_area":       { "y": 200, "height": 500 },
     "info_area_bottom_margin": 65,
     "inner_margin": 70,
-    "icon_size": 72,
-    "plus_minus_size": 52,
+    "icon_size": 96,
+    "plus_minus_size": 60,
     "title_font_size": 38,
     "desc_font_size": 26
   },
@@ -35,7 +35,7 @@
       "deck": "junk",
       "type": "junk",
       "benefits": { "navigation": 1, "fame": 2, "capacity": 3 },
-      "costs": { "bajillion": 1, "payload": 2, "fame_penalty": 1 },
+      "costs": { "bajillion": 1, "payload": 2, "fame": 1 },
       "description": "Someone launched a 1973 Ford Pinto into orbit. It still rear-ends things.",
       "art_prompt": "Colorful cartoon illustration of a rusty beat-up 1970s Ford Pinto car floating in space with a small rocket strapped to the roof, bumper falling off, a bumper sticker that says honk, exhaust fumes in zero gravity forming a cloud, Earth in background, whimsical fun art style, bright saturated colors, detailed cartoon, Pixar style"
     },

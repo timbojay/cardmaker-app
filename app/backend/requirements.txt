@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+pillow
+requests
+python-docx
+numpy
+pytest
+httpx

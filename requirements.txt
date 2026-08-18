@@ -1,2 +1,3 @@
-Pillow>=10.0
-requests>=2.31
+# CardMaker Python dependencies
+# Installs backend requirements (which also cover the root scripts)
+-r app/backend/requirements.txt

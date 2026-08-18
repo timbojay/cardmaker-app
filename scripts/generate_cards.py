@@ -35,6 +35,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 # Paths
 PROJECT_ROOT = Path(__file__).parent.parent
+
+# Model config — single source of truth in config.py at the project root
+sys.path.insert(0, str(PROJECT_ROOT))
+from config import CLIP_L, CLIP_T5, FLUX_MODEL_NAME, VAE  # noqa: E402
 CARD_DATA = PROJECT_ROOT / "card-data" / "space_junk_cards.json"
 OUTPUT_DIR = PROJECT_ROOT / "output" / "print-ready"
 PREVIEW_DIR = PROJECT_ROOT / "output" / "previews"
@@ -98,7 +102,8 @@ def load_icon(name, size=48):
                 "navigation": (50, 120, 220),
                 "fame": (220, 180, 30),
                 "bajillion": (255, 200, 50),
-                "fame_penalty": (200, 40, 40),
+                "payload": (160, 100, 50),
+                "capacity": (200, 60, 60),
             }
             color = colors.get(name, (150, 150, 150))
             draw.ellipse([2, 2, size - 2, size - 2], fill=(*color, 230))
@@ -218,14 +223,7 @@ def composite_card(art_image, card, layout):
     icons_area_w = inner_right - icons_x_start
     draw_icon_row(canvas, benefits, icons_x_start, icon_row_y, icons_area_w, icon_size)
 
-    # --- CARD ART ---
-    art_y = layout["art_area"]["y"]
-    art_h = layout["art_area"]["height"]
-    art_crop = art_image.resize((inner_width, art_h), Image.LANCZOS)
-    canvas.paste(art_crop.convert("RGBA"), (inner_left, art_y))
-
-    # --- INFO AREA (description + costs, one white block pushed to bottom) ---
-    # Calculate info area height dynamically based on content
+    # --- INFO AREA (calculate first so art can fill the gap) ---
     font_desc = get_font_regular(layout["desc_font_size"])
     desc_text = card.get("description", "")
     lines = word_wrap(draw, desc_text, font_desc, inner_width - 40)
@@ -243,6 +241,13 @@ def composite_card(art_image, card, layout):
 
     bottom_margin = layout.get("info_area_bottom_margin", 65)
     info_y = CARD_H - bottom_margin - info_h
+
+    # --- CARD ART (fills all space between header and info area) ---
+    art_y = hdr_y + hdr_h + 5
+    art_bottom = info_y - 5
+    art_h = art_bottom - art_y
+    art_crop = art_image.resize((inner_width, art_h), Image.LANCZOS)
+    canvas.paste(art_crop.convert("RGBA"), (inner_left, art_y))
 
     draw.rounded_rectangle(
         [inner_left, info_y, inner_right, info_y + info_h],
@@ -296,7 +301,7 @@ def build_prompt(card, specs):
         "4": {
             "class_type": "UnetLoaderGGUF",
             "inputs": {
-                "unet_name": "flux1-schnell-Q8_0.gguf",
+                "unet_name": FLUX_MODEL_NAME,
             },
         },
         "5": {
@@ -324,8 +329,8 @@ def build_prompt(card, specs):
         "8": {
             "class_type": "DualCLIPLoader",
             "inputs": {
-                "clip_name1": "clip_l.safetensors",
-                "clip_name2": "t5xxl_fp16.safetensors",
+                "clip_name1": CLIP_L,
+                "clip_name2": CLIP_T5,
                 "type": "flux",
             },
         },
@@ -339,7 +344,7 @@ def build_prompt(card, specs):
         "10": {
             "class_type": "VAELoader",
             "inputs": {
-                "vae_name": "ae.safetensors",
+                "vae_name": VAE,
             },
         },
         "11": {

@@ -1,6 +1,12 @@
 # CardMaker — working output (regenerated, not versioned)
 output/print-ready/
 output/previews/
+output/raw-art/
+
+# App
+app/backend/cardmaker.db
+app/frontend/node_modules/
+app/frontend/dist/
 
 # macOS
 .DS_Store

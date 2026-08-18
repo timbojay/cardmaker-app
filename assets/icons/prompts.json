@@ -1,0 +1,86 @@
+{
+  "navigation": {
+    "prompt": "Single cartoon compass icon on a solid white background, bright blue and gold nautical compass with a spinning needle, fun cartoon game icon style, clean simple bold design, centered, no text, bright vivid colors, game UI icon, white background",
+    "size": "medium"
+  },
+  "fame": {
+    "prompt": "Single cartoon golden Oscar trophy statue icon on a solid white background, shiny gold award trophy with a star on top, fun cartoon game icon style, clean simple bold design, centered, no text, bright gold color, game UI icon, white background",
+    "size": "medium"
+  },
+  "bajillion": {
+    "prompt": "Single cartoon gold bar ingot icon on a solid white background, shiny golden brick with a dollar sign stamped on it, fun cartoon game icon style, clean simple bold design, centered, no text, bright gold color, game UI icon, white background",
+    "size": "medium"
+  },
+  "payload": {
+    "prompt": "Single cartoon wooden cargo crate box icon on a solid white background, angled so it looks 3D. A brown shipping crate with a small rocket sticker on it. The crate should fill the whole icon box except for a small boundary around the edge. Fun cartoon game icon style, clean simple bold design, centered, no text, bright colors, game UI icon, white background",
+    "size": "medium"
+  },
+  "engine": {
+    "prompt": "A single cartoon image against a white background. . Bright, colorful style. A rocket engine points straight up  with orange flames surging from its rear",
+    "size": "medium"
+  },
+  "weight": {
+    "prompt": "Single cartoon triangular weight, metallic blue-grey with a loop at the top and the letter KG on the side. Fun cartoon game icon style, clean simple bold design, centered, no text, bright colors, game UI icon, white background",
+    "size": "medium"
+  },
+  "wrench": {
+    "prompt": "Single cartoon icon on a white background of a metallic blue wrench",
+    "size": "medium"
+  },
+  "materials": {
+    "prompt": "Cartoon icon on a white back ground. Simple, bold lines and cute. A single pile of wooden planks, metal ingots with a few small cogs and wheel protruding",
+    "size": "medium"
+  },
+  "skull": {
+    "prompt": "A cartoon, grinning skull, single, simple icon on a white background",
+    "size": "large"
+  },
+  "scientist": {
+    "prompt": "Single cartoon icon on a white background. Three different sized testubes filled with different colored liquids",
+    "size": "medium"
+  },
+  "legacy": {
+    "prompt": "Single cartoon icon on a white background. An atom with electrons whirling around it.",
+    "size": "medium"
+  },
+  "wrench_s": {
+    "prompt": "Single cartoon icon on a white background of a metallic blue wrench",
+    "size": "small"
+  },
+  "launch_only": {
+    "prompt": "A single cartoon image against a white background. . Bright, colorful style. A rocket stands on a launch pad,  clamped into a gantry, pointing straight up  with orange flames surging from its rear",
+    "size": "medium"
+  },
+  "skills": {
+    "prompt": "A single cartoon image against a white background. . Bright, colorful style. A gear, a lightbulb, a wrench and a pen orbit a pink brain",
+    "size": "medium"
+  },
+  "crew": {
+    "prompt": "Single cartoon icon on a simple white background. A tiny astronaut in a space suit",
+    "size": "medium"
+  },
+  "fuel": {
+    "prompt": "Single cartoon icon on a solid white background. A solid green fuel can",
+    "size": "medium"
+  },
+  "weight_s": {
+    "prompt": "Single cartoon triangular weight, metallic blue-grey with a loop at the top and the letter KG on the side. Fun cartoon game icon style, clean simple bold design, centered, no text, bright colors, game UI icon, white background",
+    "size": "small"
+  },
+  "crew_l": {
+    "prompt": "Single cartoon icon on a simple white background. A tiny astronaut in a space suit",
+    "size": "large"
+  },
+  "orbit": {
+    "prompt": "Single cartoon icon, bold, high detail colors on a simple white background. The icon expresses the term \"Orbit\" using a plain, blue planet with a fiery red orbital ring and arrow orbiting around it.",
+    "size": "large"
+  },
+  "moon": {
+    "prompt": "Single cartoon icon, bold, high detail colors on a simple white background, the Earth's Moon",
+    "size": "large"
+  },
+  "mars": {
+    "prompt": "Single cartoon icon, bold, high detail colors on a simple white background, the planet Mars",
+    "size": "large"
+  }
+}

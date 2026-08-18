@@ -1,0 +1,17 @@
+{
+  "junk": {
+    "prompt": "Cartoon seamless border pattern of rusty pipes, duct tape, bolts, a cartoon wrench and plunger sticking out, junkyard style, messy fun chaotic, whimsical bright colors, white background in center, game card border, cartoon style",
+    "border_color": [101, 67, 33],
+    "border_accent": [200, 150, 60]
+  },
+  "personnel": {
+    "prompt": "Cartoon seamless border pattern of astronaut helmets, smiley faces, space crew badge aesthetic, stars and sparkles, fun cartoon crew vibe, bright colors on light background, white background in center, game card border, cartoon style",
+    "border_color": [200, 210, 230],
+    "border_accent": [255, 255, 255]
+  },
+  "action": {
+    "prompt": "Cartoon seamless border pattern of lightning bolts, POW ZAP explosion effects, comic book action style, neon glow, bold dynamic energy, bright vivid colors, white background in center, game card border, cartoon style",
+    "border_color": [220, 20, 20],
+    "border_accent": [255, 100, 50]
+  }
+}

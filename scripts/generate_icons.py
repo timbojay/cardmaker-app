@@ -18,6 +18,10 @@ PROJECT_ROOT = Path(__file__).parent.parent
 ICONS_DIR = PROJECT_ROOT / "assets" / "icons"
 COMFYUI_URL = "http://127.0.0.1:8188"
 
+# Model config — single source of truth in config.py at the project root
+sys.path.insert(0, str(PROJECT_ROOT))
+from config import CLIP_L, CLIP_T5, FLUX_MODEL_NAME, VAE  # noqa: E402
+
 ICONS = [
     {
         "id": "navigation",
@@ -61,7 +65,7 @@ def build_prompt(art_prompt, seed=42):
         },
         "4": {
             "class_type": "UnetLoaderGGUF",
-            "inputs": {"unet_name": "flux1-schnell-Q8_0.gguf"},
+            "inputs": {"unet_name": FLUX_MODEL_NAME},
         },
         "5": {
             "class_type": "EmptyLatentImage",
@@ -81,8 +85,8 @@ def build_prompt(art_prompt, seed=42):
         "8": {
             "class_type": "DualCLIPLoader",
             "inputs": {
-                "clip_name1": "clip_l.safetensors",
-                "clip_name2": "t5xxl_fp16.safetensors",
+                "clip_name1": CLIP_L,
+                "clip_name2": CLIP_T5,
                 "type": "flux",
             },
         },
@@ -92,7 +96,7 @@ def build_prompt(art_prompt, seed=42):
         },
         "10": {
             "class_type": "VAELoader",
-            "inputs": {"vae_name": "ae.safetensors"},
+            "inputs": {"vae_name": VAE},
         },
         "11": {
             "class_type": "SaveImage",
@@ -174,19 +178,6 @@ def main():
         img = img.resize((128, 128), Image.LANCZOS)
         img.save(str(out_path))
         print(f"  Saved: {out_path}")
-
-    # Also create the "negative fame" icon by adding a red minus to the fame icon
-    fame_path = ICONS_DIR / "fame.png"
-    neg_fame_path = ICONS_DIR / "fame_penalty.png"
-    if fame_path.exists() and (not neg_fame_path.exists() or args.force):
-        print("Creating fame_penalty icon...")
-        fame = Image.open(str(fame_path)).convert("RGBA")
-        draw = ImageDraw.Draw(fame)
-        # Draw red circle with minus sign
-        draw.ellipse([0, 0, 40, 40], fill=(220, 30, 30, 230))
-        draw.rectangle([8, 16, 32, 24], fill=(255, 255, 255, 255))
-        fame.save(str(neg_fame_path))
-        print(f"  Saved: {neg_fame_path}")
 
     print("\nDone!")
 

@@ -24,6 +24,10 @@ BORDERS_DIR = PROJECT_ROOT / "assets" / "borders"
 
 COMFYUI_URL = "http://127.0.0.1:8188"
 
+# Model config — single source of truth in config.py at the project root
+sys.path.insert(0, str(PROJECT_ROOT))
+from config import CLIP_L, CLIP_T5, FLUX_MODEL_NAME, VAE  # noqa: E402
+
 CARD_W = 825
 CARD_H = 1125
 
@@ -54,7 +58,7 @@ def build_prompt(art_prompt, width, height, seed=42):
         "4": {
             "class_type": "UnetLoaderGGUF",
             "inputs": {
-                "unet_name": "flux1-schnell-Q8_0.gguf",
+                "unet_name": FLUX_MODEL_NAME,
             },
         },
         "5": {
@@ -82,8 +86,8 @@ def build_prompt(art_prompt, width, height, seed=42):
         "8": {
             "class_type": "DualCLIPLoader",
             "inputs": {
-                "clip_name1": "clip_l.safetensors",
-                "clip_name2": "t5xxl_fp16.safetensors",
+                "clip_name1": CLIP_L,
+                "clip_name2": CLIP_T5,
                 "type": "flux",
             },
         },
@@ -97,7 +101,7 @@ def build_prompt(art_prompt, width, height, seed=42):
         "10": {
             "class_type": "VAELoader",
             "inputs": {
-                "vae_name": "ae.safetensors",
+                "vae_name": VAE,
             },
         },
         "11": {
